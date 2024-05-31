@@ -5,6 +5,17 @@
 	version="2.5">
 	<display-name>emaillist3</display-name>
 
+	<!-- Context Parameters -->
+	<context-param>
+	     <param-name>contextConfigLocation</param-name>
+	     <param-value>classpath:applicationContext.xml</param-value>
+	</context-param> 
+	
+	<!-- Context Loader Listener -->
+	<listener>
+	    <listener-class> org.springframework.web.context.ContextLoaderListener </listener-class>
+	</listener>
+
 	<!-- Dispatcher Servlet -->	
 	<servlet>
 		<servlet-name>dispatcher-servlet</servlet-name>
