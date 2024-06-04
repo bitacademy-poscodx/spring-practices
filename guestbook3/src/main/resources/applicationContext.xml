@@ -20,7 +20,13 @@
 		<property name="password" value="webdb" />
 	</bean>
 	
+	<!-- JdbcContext -->
 	<bean id="jdbcContext" class="com.poscodx.guestbook.repository.template.JdbcContext">
+		<constructor-arg index="0" ref="dataSource" />
+	</bean>
+
+	<!-- JdbcTemplate -->
+	<bean id="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg index="0" ref="dataSource" />
 	</bean>
 
