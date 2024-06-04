@@ -10,13 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.poscodx.guestbook.repository.GuestbookRepository;
+import com.poscodx.guestbook.repository.GuestbookRepositoryWithRawJdbc;
 import com.poscodx.guestbook.vo.GuestbookVo;
 
 @Controller
 public class GuestbookController {
 	@Autowired
-	private GuestbookRepository guestbookRepository;
+	private GuestbookRepositoryWithRawJdbc guestbookRepository;
+	
+	//@Autowired
+	//private GuestbookRepositoryWithJdbcContext guestbookRepository2;
+	
+	//@Autowired
+	//private GuestbookRepositoryWithJdbcTemplate guestbookRepository3;
+	
 	
 	@RequestMapping("/")
 	public String index(Model model) {
