@@ -19,6 +19,10 @@
 		<property name="username" value="webdb" />
 		<property name="password" value="webdb" />
 	</bean>
+	
+	<bean id="jdbcContext" class="com.poscodx.guestbook.repository.template.JdbcContext">
+		<constructor-arg index="0" ref="dataSource" />
+	</bean>
 
 	<context:annotation-config />
 	<context:component-scan
