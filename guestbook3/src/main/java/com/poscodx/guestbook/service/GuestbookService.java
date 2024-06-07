@@ -48,7 +48,7 @@ public class GuestbookService {
 			// TX:END(SUCCESS) ///////
 			transactionManager.commit(status);
 		} catch(Throwable e) {
-			// TX:END(Fail) ///////
+			// TX:END(Fail) //////////
 			transactionManager.rollback(status);
 		}
 	}
