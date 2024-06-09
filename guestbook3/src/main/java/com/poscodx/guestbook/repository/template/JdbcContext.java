@@ -19,7 +19,7 @@ public class JdbcContext {
 		this.dataSource = dataSource;
 	}
 	
-	public <T> List<T> queryForList(String sql, RowMapper<T> rowMapper) {
+	public <E> List<E> queryForList(String sql, RowMapper<E> rowMapper) {
 		return executeQueryForListWithStatementStrategy(new StatementStrategy() {
 			@Override
 			public PreparedStatement makeStatement(Connection connection) throws SQLException {
@@ -29,7 +29,7 @@ public class JdbcContext {
 		}, rowMapper);
 	}
 
-	public <T> List<T> queryForList(String sql, Object[] parameters, RowMapper<T> rowMapper) {
+	public <E> List<E> queryForList(String sql, Object[] parameters, RowMapper<E> rowMapper) {
 		return executeQueryForListWithStatementStrategy(new StatementStrategy() {
 			@Override
 			public PreparedStatement makeStatement(Connection connection) throws SQLException {
