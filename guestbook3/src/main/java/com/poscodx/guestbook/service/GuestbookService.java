@@ -38,17 +38,23 @@ public class GuestbookService {
 	}
 	
 	public void deleteContents(Long no, String password) {
-		// TX:BEGIN //////////////
+		// TX:BEGIN ///////////////////////////
 		TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
-
-		try {
-			guestbookLogRepository.update(no);
-			guestbookRepository.deleteByNoAndPassword(no, password);
 		
-			// TX:END(SUCCESS) ///////
+		try {
+			GuestbookVo vo = guestbookRepository.findByNo(no);
+			if(vo == null) {
+				return;
+			}
+			
+			int count = guestbookRepository.deleteByNoAndPassword(no, password);
+			if(count == 1) {
+				guestbookLogRepository.update(vo.getRegDate());
+			}
+			// TX:END(SUCCESS) ////////////////
 			transactionManager.commit(status);
 		} catch(Throwable e) {
-			// TX:END(Fail) //////////
+			// TX:END(FAIL) ///////////////////
 			transactionManager.rollback(status);
 		}
 	}
