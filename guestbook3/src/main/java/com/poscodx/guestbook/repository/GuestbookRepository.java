@@ -19,7 +19,7 @@ public class GuestbookRepository {
 	}
 	
 	public List<GuestbookVo> findAll() {
-		return jdbcContext.query(
+		return jdbcContext.queryForList(
 			"select no, name, contents, date_format(reg_date, '%Y/%m/%d %H:%i:%s') from guestbook order by reg_date desc",
 			new RowMapper<GuestbookVo>() {
 				@Override
@@ -31,7 +31,23 @@ public class GuestbookRepository {
 					vo.setRegDate(rs.getString(4));
 					return vo;
 				}
-
+			});
+	}
+	
+	public GuestbookVo findByNo(Long no) {
+		return jdbcContext.queryForObject(
+			"select no, name, contents, date_format(reg_date, '%Y-%m-%d') from guestbook where no = ?",
+			new Object[] {no},
+			new RowMapper<GuestbookVo>() {
+				@Override
+				public GuestbookVo mapRow(ResultSet rs, int rowNum) throws SQLException {
+					GuestbookVo vo = new GuestbookVo();
+					vo.setNo(rs.getLong(1));
+					vo.setName(rs.getString(2));
+					vo.setContents(rs.getString(3));
+					vo.setRegDate(rs.getString(4));
+					return vo;
+				}
 			});
 	}
 	
@@ -40,8 +56,6 @@ public class GuestbookRepository {
 	}
 	
 	public int insert(GuestbookVo vo) {
-		return jdbcContext.update(
-			"insert into guestbook values(null, ?, ?, ?, now())",
-			new Object[] {vo.getName(), vo.getPassword(), vo.getContents()});
+		return jdbcContext.update("insert into guestbook values(null, ?, ?, ?, now())", new Object[] {vo.getName(), vo.getPassword(), vo.getContents()});
 	}
 }
