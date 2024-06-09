@@ -17,10 +17,10 @@ public class GuestbookLogRepository {
 	}
 	
 	public int update() {
-		return jdbcContext.update("update guestbook_log set count = count + 1 where date = current_date()");
+		return jdbcContext.update("update guestbook_log set count = count+1 where date = current_date()");
 	}
-	
-	public int update(Long no) {
-		return jdbcContext.update("update guestbook_log set count = count - 1 where date = (select date(reg_date) from guestbook where no = ?)", new Object[] {no});
+
+	public int update(String regDate) {
+		return jdbcContext.update("update guestbook_log set count = count-1 where date_format(date, '%Y-%m-%d') = ?", new Object[] {regDate});
 	}
 }
