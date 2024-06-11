@@ -11,6 +11,7 @@
 		<module>emaillist3</module>
 		<module>guestbook3</module>
 		<module>aoptest</module>
+		<module>fileupload</module>
 	</modules>
 	<build>
 		<plugins>
