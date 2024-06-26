@@ -14,6 +14,7 @@
 		<module>fileupload</module>
 		<module>logex</module>
 		<module>container</module>
+		<module>thymeleaf</module>
 	</modules>
 	<build>
 		<plugins>
