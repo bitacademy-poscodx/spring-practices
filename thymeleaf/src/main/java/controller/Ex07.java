@@ -19,7 +19,7 @@ public class Ex07 {
 	}
 	
 	@RequestMapping(value="/join", method=RequestMethod.POST)
-	public String join(@Valid UserVo userVo, BindingResult result, Model model) {
+	public String join(@ModelAttribute @Valid UserVo userVo, BindingResult result, Model model) {
 		if(result.hasErrors()) {
 			model.addAllAttributes(result.getModel());
 			return "ex07/join";
